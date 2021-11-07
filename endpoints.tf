@@ -49,6 +49,10 @@ resource "aws_vpc_endpoint" "week10-ec2-ep" {
   ]
 
   private_dns_enabled = true
+
+  tags = {
+    Environment = "EC2 Endpoint"
+  }
 }
 
 # SQS
@@ -63,5 +67,9 @@ resource "aws_vpc_endpoint" "week10-sqs-ep" {
   ]
 
   private_dns_enabled = true
+
+  tags = {
+    Environment = "SQS Endpoint"
+  }
 }
 
