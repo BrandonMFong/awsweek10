@@ -45,6 +45,11 @@ resource "aws_subnet" "week10-sub-a" {
   }
 }
 
+resource "aws_route_table_association" "week10-sub-a-assoc" {
+  subnet_id      = aws_subnet.week10-sub-a.id
+  route_table_id = aws_route_table.week10-pub-rt.id
+}
+
 # Public Subnet 2
 resource "aws_subnet" "week10-sub-b" {
   vpc_id                  = aws_vpc.week10-vpc.id
@@ -55,6 +60,11 @@ resource "aws_subnet" "week10-sub-b" {
   tags = {
     Name = "week10-sub-b"
   }
+}
+
+resource "aws_route_table_association" "week10-sub-b-assoc" {
+  subnet_id      = aws_subnet.week10-sub-b.id
+  route_table_id = aws_route_table.week10-pub-rt.id
 }
 
 # Private Subnet 1
@@ -108,6 +118,36 @@ resource "aws_route_table" "week10-pri-rt" {
 
   tags = {
     Name = "week10-pri-rt"
+  }
+}
+
+resource "aws_route_table" "week10-pub-rt" {
+  vpc_id = aws_vpc.week10-vpc.id
+
+  route = [{
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.week10-igw-v2.id
+
+    # Values suggested by professor
+    egress_only_gateway_id    = ""
+    instance_id               = ""
+    ipv6_cidr_block           = ""
+    nat_gateway_id            = ""
+    network_interface_id      = ""
+    transit_gateway_id        = ""
+    vpc_endpoint_id           = ""
+    vpc_peering_connection_id = ""
+
+    # Values suggested by the validate process
+    # Investigate these values if there is an issue
+    # with our config
+    carrier_gateway_id         = ""
+    destination_prefix_list_id = ""
+    local_gateway_id           = ""
+  }, ]
+
+  tags = {
+    Name = "week10-pub-rt"
   }
 }
 
