@@ -1,5 +1,5 @@
 # EC2
-resource "aws_instance" "week10-bastion-vm" {
+/* resource "aws_instance" "week10-bastion-vm" {
   ami           = "ami-02e136e904f3da870"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.week10-sub-b.id
@@ -13,7 +13,7 @@ resource "aws_instance" "week10-bastion-vm" {
   tags = {
     Name = "week10-bastion-vm"
   }
-}
+}*/
 
 # worker vm
 resource "aws_instance" "week10-worker-vm" {
